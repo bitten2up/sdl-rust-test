@@ -6,7 +6,6 @@ use sdl2::rect::{Point, Rect};
 // "self" imports the "image" module itself as well as everything else we listed
 use sdl2::image::{self, LoadTexture, InitFlag};
 use std::time::Duration;
-use sdl2::gfx::framerate::FPSManager;
 
 fn render(
     canvas: &mut WindowCanvas,
@@ -47,7 +46,6 @@ fn main() -> Result<(), String> {
         .expect("could not make a canvas");
     let texture_creator = canvas.texture_creator();
     let texture = texture_creator.load_texture("assets/bitten.png")?;
-
     let position = Point::new(0, 0);
     // src position in the spritesheet
     let mut frame = 0;
@@ -55,6 +53,8 @@ fn main() -> Result<(), String> {
 
     let mut event_pump = sdl_context.event_pump()?;
     let mut i = 0;
+    let mut play_x=0;
+    let mut play_y=0;
     'running: loop {
         // Handle events
         for event in event_pump.poll_iter() {
